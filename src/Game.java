@@ -6,6 +6,11 @@ import java.util.Scanner;
 public class Game {
 
     public static void main(String[] args){
+        printAsciiTitle();
+        GameBoard gameBoard = gameSetup();
+        gameBoard.printGameBoard();
+    }
+    public static GameBoard gameSetup(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter your name: ");
         String username = sc.nextLine();
@@ -32,8 +37,9 @@ public class Game {
         } while(numberOfMines > (Math.pow(boardSize,2)-1) || numberOfMines < 1);
         System.out.println("Number of mines = " + numberOfMines);
 
+        sc.close();
         GameBoard gameBoard = new GameBoard(boardSize,numberOfMines);
-        gameBoard.printGameBoard();
+        return gameBoard;
     }
 
     public static void printAsciiTitle(){
