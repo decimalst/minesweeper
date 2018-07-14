@@ -1,7 +1,10 @@
+package com.minesweeper;
+
 import com.minesweeper.domain.GameBoard;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
 
 public class Game {
 
