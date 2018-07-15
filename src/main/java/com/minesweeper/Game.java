@@ -1,6 +1,8 @@
 package com.minesweeper;
 
+import com.minesweeper.domain.Command;
 import com.minesweeper.domain.GameBoard;
+import com.minesweeper.util.InputHandler;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -8,13 +10,26 @@ import java.util.Scanner;
 
 public class Game {
 
+
+
+
     public static void main(String[] args){
-        printAsciiTitle();
-        GameBoard gameBoard = gameSetup();
-        gameBoard.printGameBoard();
-    }
-    public static GameBoard gameSetup(){
         Scanner sc = new Scanner(System.in);
+        printAsciiTitle();
+        GameBoard gameBoard = gameSetup(sc);
+        gameLoop(gameBoard,sc);
+    }
+
+    public static void gameLoop(GameBoard gameBoard, Scanner sc){
+        while (true) {
+            gameBoard.printGameBoard();
+            InputHandler inputHandler = new InputHandler(sc,gameBoard.getBoardSize());
+            Command command = inputHandler.promptForCommand();
+            gameBoard.handleCommand(command);
+        }
+    }
+
+    public static GameBoard gameSetup(Scanner sc){
         System.out.println("Enter your name: ");
         String username = sc.nextLine();
         int boardSize = 0;
@@ -39,8 +54,7 @@ public class Game {
             }
         } while(numberOfMines > (Math.pow(boardSize,2)-1) || numberOfMines < 1);
         System.out.println("Number of mines = " + numberOfMines);
-
-        sc.close();
+        sc.nextLine();
         GameBoard gameBoard = new GameBoard(boardSize,numberOfMines);
         return gameBoard;
     }

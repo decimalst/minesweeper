@@ -10,10 +10,12 @@ public class GameBoard {
     Tile[][] tileArray;
     int boardSize;
     int numberOfMines;
+    int numberOfFlagsPlaced;
 
     public GameBoard(int boardSize, int numberOfMines){
         this.boardSize = boardSize;
         this.numberOfMines = numberOfMines;
+        this.numberOfFlagsPlaced = 0;
         this.init();
     }
 
@@ -61,6 +63,16 @@ public class GameBoard {
         }
     }
 
+    public void handleCommand(Command command){
+        if(command.command.equals("f")){
+            this.tileArray[command.y][command.x].flagged = true;
+            this.numberOfFlagsPlaced++;
+        }
+        if(command.command.equals("r")){
+            this.tileArray[command.y][command.x].reveal();
+        }
+    }
+
     public void printGameBoard(){
         for(int i = 0; i < tileArray.length; i++){
             for(int j = 0; j < tileArray[i].length; j++){
@@ -75,8 +87,7 @@ public class GameBoard {
         List<Integer> possibleX = new ArrayList<Integer>();
         List<Integer> possibleY = new ArrayList<Integer>();
 
-        //I = 5 J = 4
-        //[4=5, 5=4, 6=4]
+
 
         if((i - 1) >= 0){
             possibleY.add(i-1);
@@ -102,5 +113,29 @@ public class GameBoard {
         }
         adjacentPairs.remove(i,j);
         return adjacentPairs;
+    }
+
+    public int getBoardSize() {
+        return boardSize;
+    }
+
+    public void setBoardSize(int boardSize) {
+        this.boardSize = boardSize;
+    }
+
+    public int getNumberOfMines() {
+        return numberOfMines;
+    }
+
+    public void setNumberOfMines(int numberOfMines) {
+        this.numberOfMines = numberOfMines;
+    }
+
+    public int getNumberOfFlagsPlaced() {
+        return numberOfFlagsPlaced;
+    }
+
+    public void setNumberOfFlagsPlaced(int numberOfFlagsPlaced) {
+        this.numberOfFlagsPlaced = numberOfFlagsPlaced;
     }
 }

@@ -13,11 +13,15 @@ public class Tile {
     }
 
     public void reveal(){
-        if(minePresent){
-            //TODO: should end the game
-            ;
-        }
+//        if(minePresent){
+//            //TODO: should end the game
+//            ;
+//        }
         this.revealed = true;
+    }
+
+    public  void flag(){
+        this.flagged = true;
     }
     public boolean hasMinePresent() {
         return minePresent;
@@ -41,7 +45,7 @@ public class Tile {
 
     @Override
     public String toString(){
-        if ( revealed ){
+        if ( revealed || true ){
             if(minePresent){
                 return "M";
             }
@@ -53,7 +57,7 @@ public class Tile {
             return "F";
         }
         else {
-            return "O";
+            return "#";
         }
 
     }
