@@ -41,7 +41,7 @@ public class Tile {
 
     @Override
     public String toString(){
-        if ( revealed || true ){
+        if ( revealed ){
             if(minePresent){
                 return "M";
             }
